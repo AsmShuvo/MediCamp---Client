@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaHandHoldingMedical } from "react-icons/fa";
 import { GrAdd } from "react-icons/gr";
 import { IoIosArrowForward } from "react-icons/io";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../../../Providers/AuthProvider";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  console.log(user?.displayName);
+  console.log(user?.email);
   return (
     <div className="bg-[#0000003c]">
       <div className="navbar">
@@ -41,7 +45,7 @@ const Navbar = () => {
                 </NavLink>
               </li>
               <li className="text-xl font-semibold">
-                <NavLink to="/joinUs">
+                <NavLink to="/login">
                   JOIN US <GrAdd />
                 </NavLink>
               </li>
@@ -70,13 +74,47 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li className="text-xl font-semibold">
-              <NavLink to="/joinUs">
+              <NavLink to="/login">
                 JOIN US <GrAdd />
               </NavLink>
             </li>
           </ul>
         </div>
-        <div className="navbar-end"></div>
+        {/* profile */}
+        {user ? (
+          <div className="navbar-end mr-6">
+            <div className="dropdown dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
+                <div className="w-10 rounded-full">
+                  <img alt="" src={user?.photoURL} />
+                </div>
+              </div>
+              <ul
+                tabIndex={0}
+                className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  <p className="justify-between">{user?.displayName}</p>
+                </li>
+                <li onClick={logOut}>
+                  <span className="text-red-600 text-lg font-semibold">
+                    Logout
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        ) : (
+          <>
+            <div className="navbar-end mr-6">
+              <div className="dropdown dropdown-end"></div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
