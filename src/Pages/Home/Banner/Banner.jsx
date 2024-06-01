@@ -11,7 +11,7 @@ const Banner = () => {
           />
           <div className="absolute h-full bg-gradient-to-r from-[#151515b9] to-[rgba(21,21,21,0)] flex items-center left-0 top-0  gap-4">
             <div className="space-y-7 pl-16 mt-16">
-              <h1 className="text-6xl font-serif w-1/4 text-white font-bold animate__animated animate__backInDown ">
+              <h1 className="text-4xl font-serif w-1/3 text-white font-bold animate__animated animate__backInDown ">
                 <span className="text-secondary ">Succes Story</span> -
                 Empowering Women with Health Education
               </h1>
@@ -45,7 +45,7 @@ const Banner = () => {
           />
           <div className="absolute h-full bg-gradient-to-r from-[#151515b9] to-[rgba(21,21,21,0)] flex items-center left-0 top-0  gap-4">
             <div className="space-y-7 pl-16 mt-16">
-              <h1 className="text-6xl font-serif w-1/4 text-white font-bold">
+              <h1 className="text-4xl font-serif w-1/3 text-white font-bold">
                 <span className="text-secondary">Succes Story</span> - Healing
                 Smiles with Dental Care
               </h1>
@@ -78,7 +78,7 @@ const Banner = () => {
           />
           <div className="absolute h-full bg-gradient-to-r from-[#151515b9] to-[rgba(21,21,21,0)] flex items-center left-0 top-0  gap-4">
             <div className="space-y-7 pl-16 mt-16">
-              <h1 className="text-6xl font-serif w-1/4 text-white font-bold">
+              <h1 className="text-4xl font-serif w-1/3 text-white font-bold">
                 <span className="text-secondary">Succes Story</span> - Saving
                 Lives with Timely Diagnosis
               </h1>
@@ -111,7 +111,7 @@ const Banner = () => {
           />
           <div className="absolute h-full bg-gradient-to-r from-[#151515b9] to-[rgba(21,21,21,0)] flex items-center left-0 top-0  gap-4">
             <div className="space-y-7 pl-16 mt-16">
-              <h1 className="text-6xl font-serif w-1/4 text-white font-bold">
+              <h1 className="text-4xl font-serif w-1/3 text-white font-bold">
                 <span className="text-secondary">Succes Story</span> -
                 Transforming Lives Through Free Eye Surgeries
               </h1>
