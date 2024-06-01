@@ -4,6 +4,7 @@ import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home";
 import RegisterForm from "../Pages/Register/Register";
 import Login from "../Pages/Login/Login";
+import Camps from "../Pages/Camps/Camps";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -21,6 +22,10 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/availableCamps",
+        element: <Camps />,
       },
     ],
   },

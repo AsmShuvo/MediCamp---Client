@@ -10,8 +10,8 @@ const Navbar = () => {
   console.log(user?.displayName);
   console.log(user?.email);
   return (
-    <div className="bg-[#0000003c]">
-      <div className="navbar">
+    <div className="">
+      <div className="navbar bg-[#0007] fixed z-10">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -64,17 +64,17 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li className="text-xl font-semibold">
-              <NavLink to="/">
+              <NavLink className="text-white" to="/">
                 HOME <IoIosArrowForward />
               </NavLink>
             </li>
             <li className="text-xl font-semibold">
-              <NavLink to="/availableCamps">
+              <NavLink className="text-white" to="/availableCamps">
                 AVAILABLE CAMPS <IoIosArrowForward />
               </NavLink>
             </li>
             <li className="text-xl font-semibold">
-              <NavLink to="/login">
+              <NavLink className="text-white" to="/login">
                 JOIN US <GrAdd />
               </NavLink>
             </li>
