@@ -5,6 +5,7 @@ import Home from "../Pages/Home/Home/Home";
 import RegisterForm from "../Pages/Register/Register";
 import Login from "../Pages/Login/Login";
 import Camps from "../Pages/Camps/Camps";
+import CampDetails from "../Pages/CampDetails/CampDetails";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -26,6 +27,10 @@ export const router = createBrowserRouter([
       {
         path: "/availableCamps",
         element: <Camps />,
+      },
+      {
+        path: "/camp-details/:id",
+        element: <CampDetails />,
       },
     ],
   },

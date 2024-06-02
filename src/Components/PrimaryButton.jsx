@@ -6,11 +6,11 @@ const PrimaryButton = ({ route, text }) => {
     <div className="animate__animated animate__fadeIn">
       <Link
         to={`/${route}`}
-        class="group relative inline-flex items-center overflow-hidden rounded bg-primary px-8 py-3 text-main focus:outline-none focus:ring active:bg-primary"
+        className="group relative inline-flex items-center overflow-hidden rounded bg-primary px-8 py-3 text-main focus:outline-none focus:ring active:bg-primary"
       >
-        <span class="absolute -start-full transition-all group-hover:start-4">
+        <span className="absolute -start-full transition-all group-hover:start-4">
           <svg
-            class="size-5 rtl:rotate-180"
+            className="size-5 rtl:rotate-180"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -25,7 +25,7 @@ const PrimaryButton = ({ route, text }) => {
           </svg>
         </span>
 
-        <span class="text-lg capitalize text-white font-medium transition-all group-hover:ms-4">
+        <span className="text-lg capitalize text-white font-medium transition-all group-hover:ms-4">
           {text}
         </span>
       </Link>

@@ -10,7 +10,7 @@ const useCamps = () => {
       const res = await axiosSecure.get("/camps");
       return res.data;
     },
-  });
+  }); 
   return [camps, refetch];
 };
 

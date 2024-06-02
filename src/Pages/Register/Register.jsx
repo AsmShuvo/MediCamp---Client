@@ -2,14 +2,16 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { updateProfile } from "firebase/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
   const { createUser, logOut, user, setUser } = useContext(AuthContext);
+  const nevigate = useNavigate();
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm();
   const password = watch("password");
@@ -41,7 +43,9 @@ const RegisterForm = () => {
             console.log(userCredential.displayName);
             console.log(userCredential.photoURL);
             alert("Registration Successfuil");
+            reset();
             logOut();
+            nevigate("/login");
           })
           .catch((err) => {
             console.log("Error while updating profile: ", err);

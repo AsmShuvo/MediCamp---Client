@@ -26,7 +26,7 @@ const PopularCards = ({ camp }) => {
           <div className="hero-content flex-col lg:flex-row-reverse">
             <img src={image} className="max-w-sm rounded-lg shadow-2xl" />
             <div>
-              <h1 className="text-3xl font-bold font-serif">{name}</h1>
+              <h1 className="text-3xl font-bold font-serif ">{name}</h1>
               <p className="py-4 font-mono">{description}</p>
               <div className="border w-fit bg-white rounded-lg p-4">
                 <div className="flex">

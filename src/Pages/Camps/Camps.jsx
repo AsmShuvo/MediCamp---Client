@@ -14,7 +14,7 @@ const Camps = () => {
   console.log(camps);
 
   return (
-    <>
+    <div className="mx-10">
       <MenuCover
         image={campsCover}
         title="Explore Our Exciting Health Camps"
@@ -26,7 +26,7 @@ const Camps = () => {
           <Camp key={camp._id} camp={camp} />
         ))}
       </div>
-    </>
+    </div>
   );
 };
 
