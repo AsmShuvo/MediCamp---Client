@@ -5,6 +5,7 @@ import MenuCover from "../../Components/Covers/MenuCover";
 import { FaSearch, FaSort } from "react-icons/fa";
 
 import campsCover from "../../../public/images/camps.png";
+import { TbLayout } from "react-icons/tb";
 
 const Camps = () => {
   useEffect(() => {
@@ -30,11 +31,15 @@ const Camps = () => {
   };
 
   const sortedCamps = sortCamps(camps, sortBy);
-  console.log(sortedCamps);
-  // refetch;
-  // if (isLoading) return <div>Loading...</div>;
-  // if (error) return <div>Error loading camps: {error.message}</div>;
-
+  const [cols, setCols] = useState(3);
+  const hanldeCols = () => {
+    if (cols == 2) {
+      setCols(3);
+    }
+    if (cols == 3) {
+      setCols(2);
+    }
+  };
   return (
     <div className="mx-10">
       <MenuCover
@@ -102,9 +107,9 @@ const Camps = () => {
             Search
           </button>
         </form>
-        <div className="w-1/3">
+        <div className="w-1/3 flex gap-2 items-center">
           <details className="dropdown">
-            <summary className="m-1 btn btn-wide btn-outline text-primary hover:bg-secondary hover:border-secondary">
+            <summary className="m-1 btn w-40 btn-outline text-primary hover:bg-secondary hover:border-secondary">
               Sort Here <FaSort />
             </summary>
             <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
@@ -118,9 +123,21 @@ const Camps = () => {
               </li>
             </ul>
           </details>
+          <div className="inline-flex hover:bg-secondary h-12 items-center divide-x rounded dark:bg-violet-600 dark:text-gray-100 dark:divide-gray-300">
+            <button
+              onClick={hanldeCols}
+              type="button"
+              className="px-8 w-36 py-3 flex items-center gap-1"
+            >
+              <TbLayout /> Columns
+            </button>
+            <button type="button" title="Toggle dropdown" className="p-3">
+              {cols}
+            </button>
+          </div>
         </div>
       </div>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 my-10">
+      <div className={`grid md:grid-cols-2 lg:grid-cols-${cols} gap-4 my-10`}>
         {sortedCamps.map((camp) => (
           <Camp key={camp._id} camp={camp} />
         ))}

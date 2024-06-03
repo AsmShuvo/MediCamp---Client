@@ -21,7 +21,7 @@ const Camp = ({ camp }) => {
   console.log(dateString);
   console.log(timeString);
   return (
-    <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow ">
+    <div className="max-w-sm mx-auto bg-white border border-gray-200 rounded-lg shadow ">
       <div>
         <img className="rounded-t-lg p-4" src={image} alt="" />
       </div>
