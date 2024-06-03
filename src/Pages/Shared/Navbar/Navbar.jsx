@@ -4,6 +4,7 @@ import { GrAdd } from "react-icons/gr";
 import { IoIosArrowForward } from "react-icons/io";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProvider";
+import { FaCartPlus } from "react-icons/fa6";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -83,6 +84,9 @@ const Navbar = () => {
         {/* profile */}
         {user ? (
           <div className="navbar-end mr-6">
+            <div className=" px-2 mr-2 bg-secondary rounded-md flex gap-2 items-center">
+              <FaCartPlus /> 0
+            </div>
             <div className="dropdown dropdown-end">
               <div
                 tabIndex={0}

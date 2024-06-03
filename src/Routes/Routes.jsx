@@ -7,6 +7,8 @@ import Login from "../Pages/Login/Login";
 import Camps from "../Pages/Camps/Camps";
 import CampDetails from "../Pages/CampDetails/CampDetails";
 import PrivateRoute from "./PrivateRoutes";
+import Dashboard from "../Layout/Dashboard";
+import Cart from "../Pages/DashBoard/Dashboard/Cart/Cart";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -34,6 +36,21 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <CampDetails />
+          </PrivateRoute>
+        ),
+      },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: <Dashboard />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "cart",
+        element: (
+          <PrivateRoute>
+            <Cart />
           </PrivateRoute>
         ),
       },

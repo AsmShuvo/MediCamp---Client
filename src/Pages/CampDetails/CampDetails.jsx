@@ -67,9 +67,11 @@ const CampDetails = () => {
     const gender = form.gender.value;
     const phone = form.phone.value;
     const em_phone = form.em_phone.value;
+    const campFee = parseInt(fees.replace("$", ""), 10);
     const newParticipant = {
       participant_name: user?.displayName,
       participant_email: user?.email,
+      campFee,
       camp_name: name,
       age,
       gender,
