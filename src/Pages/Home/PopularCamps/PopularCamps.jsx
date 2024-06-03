@@ -23,6 +23,7 @@ const PopularCamps = () => {
             From fitness retreats to wellness workshops, find the perfect event to boost your well-being.
             Join our community and embark on a journey to a healthier lifestyle today!"
       />
+
       <div className="mt-10">
         <div className="flex gap-8">
           <div className="flex flex-col gap-12 ">
