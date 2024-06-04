@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useState, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useAxiosSecure from "./../../hooks/useAxiosSecure";
 import { AuthContext } from "./../../Providers/AuthProvider";
 import Swal from "sweetalert2";
@@ -90,11 +90,12 @@ const CampDetails = () => {
       participant_count: participant_count + 1,
       description,
     };
-
+    const nevigate = useNavigate();
     axios.post(`${serverUrl}/participants`, newParticipant).then((data) => {
       if (data.data.insertedId) {
         Swal.fire("Application successful");
         form.reset();
+        nevigate("/camps");
       }
     });
 

@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import PrimaryButton from "../../../Components/PrimaryButton";
+import { useContext } from "react";
+import { AuthContext } from "../../../Providers/AuthProvider";
 const Banner = () => {
+  const { user } = useContext(AuthContext);
   return (
     <div>
       <div className="carousel w-full h-screen">
@@ -23,10 +26,12 @@ const Banner = () => {
                 initiative has empowered her to make informed health decisions
                 for herself and her family.
               </p>
-              <div className="flex flex-col md:flex-row gap-2">
-                <PrimaryButton route="register" text="register" />
-                <PrimaryButton route="login" text="login" />
-              </div>
+              {!user && (
+                <div className="flex flex-col md:flex-row gap-2">
+                  <PrimaryButton route="register" text="register" />
+                  <PrimaryButton route="login" text="login" />
+                </div>
+              )}
             </div>
           </div>
           <div className="absolute flex justify-end gap-4 transform -translate-y-1/2 left-5 right-5 bottom-0">
@@ -56,10 +61,12 @@ const Banner = () => {
                 Her beaming smile after the procedure was a testament to the
                 positive impact of our services.
               </p>
-              <div className="flex flex-col md:flex-row gap-2">
-                <PrimaryButton route="register" text="register" />
-                <PrimaryButton route="login" text="login" />
-              </div>
+              {!user && (
+                <div className="flex flex-col md:flex-row gap-2">
+                  <PrimaryButton route="register" text="register" />
+                  <PrimaryButton route="login" text="login" />
+                </div>
+              )}
             </div>
           </div>
           <div className="absolute flex justify-end gap-4 transform -translate-y-1/2 left-5 right-5 bottom-0">
@@ -89,10 +96,12 @@ const Banner = () => {
                 check-up. Early detection allowed him to start treatment
                 immediately, significantly improving his quality of life.
               </p>
-              <div className="flex flex-col md:flex-row gap-2">
-                <PrimaryButton route="register" text="register" />
-                <PrimaryButton route="login" text="login" />
-              </div>
+              {!user && (
+                <div className="flex flex-col md:flex-row gap-2">
+                  <PrimaryButton route="register" text="register" />
+                  <PrimaryButton route="login" text="login" />
+                </div>
+              )}
             </div>
           </div>
           <div className="absolute flex justify-end gap-4 transform -translate-y-1/2 left-5 right-5 bottom-0">
@@ -123,10 +132,12 @@ const Banner = () => {
                 Mr. Doe can now see clearly and has resumed his daily activities
                 with newfound independence.
               </p>
-              <div className="flex flex-col md:flex-row gap-2">
-                <PrimaryButton route="register" text="register" />
-                <PrimaryButton route="login" text="login" />
-              </div>
+              {!user && (
+                <div className="flex flex-col md:flex-row gap-2">
+                  <PrimaryButton route="register" text="register" />
+                  <PrimaryButton route="login" text="login" />
+                </div>
+              )}
             </div>
           </div>
           <div className="absolute flex justify-end gap-4 transform -translate-y-1/2 left-5 right-5 bottom-0">

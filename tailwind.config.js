@@ -6,6 +6,7 @@ export default {
       colors: {
         primary: "#267DE7",
         secondary: "#F46700",
+        "primary-dark": "#2779bd",
       },
       container: {
         center: true,

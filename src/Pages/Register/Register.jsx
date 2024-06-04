@@ -3,10 +3,18 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+const imagebbKey = import.meta.env.VITE_imagebb_key;
+import useAxiosPublic from "./../../hooks/useAxiosPublic";
+
+const imageHostingApi = `https://api.imgbb.com/1/upload?key=${imagebbKey}`;
 
 const RegisterForm = () => {
   const { createUser, logOut, user, setUser } = useContext(AuthContext);
   const nevigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const {
     register,
     handleSubmit,
@@ -16,18 +24,31 @@ const RegisterForm = () => {
   } = useForm();
   const password = watch("password");
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data.email);
     const email = data.email;
     const name = data.username;
     const password = data.password;
     const confirmPass = data.confirmPassword;
     const image = data.photoURL;
+    // photo upload to imgbb and get url
+    // const res= await axiosPublic.post(imageHostingApi, )
+
     const registeredUser = {
       email,
       name,
       image,
     };
+    // posting user to userCollection
+    axiosSecure
+      .post("/users", registeredUser)
+      .then((data) => {
+        console.log("new User posted to DB");
+      })
+      .catch((err) => {
+        console.log("err while posting user on DB");
+      });
+
     console.log(registeredUser);
     createUser(email, password)
       .then((res) => {
@@ -42,20 +63,20 @@ const RegisterForm = () => {
             console.log(userCredential.email);
             console.log(userCredential.displayName);
             console.log(userCredential.photoURL);
-            alert("Registration Successfuil");
+            Swal.fire("Registration Successfuil");
             reset();
             logOut();
             nevigate("/login");
           })
           .catch((err) => {
             console.log("Error while updating profile: ", err);
-            alert("Profile is not updated");
+            Swal.fire("Profile is not updated");
             return;
           });
       })
       .catch((err) => {
         console.log("Err: ", err);
-        alert("Registration Failed! Your email is already in use");
+        Swal.fire("Registration Failed! Your email is already in use");
         return;
       });
   };

@@ -9,6 +9,9 @@ import CampDetails from "../Pages/CampDetails/CampDetails";
 import PrivateRoute from "./PrivateRoutes";
 import Dashboard from "../Layout/Dashboard";
 import Cart from "../Pages/DashBoard/Dashboard/Cart/Cart";
+import Profile from "../Pages/DashBoard/Profile/Profile";
+import AdminProfile from "../Pages/DashBoard/Profile/AdminProfile";
+import AddCamp from "./../Pages/DashBoard/AddItems/AddItems";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -53,6 +56,26 @@ export const router = createBrowserRouter([
             <Cart />
           </PrivateRoute>
         ),
+      },
+      {
+        path: "profile",
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "adminProfile",
+        element: (
+          <PrivateRoute>
+            <AdminProfile />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "addCamp",
+        element: <AddCamp />,
       },
     ],
   },

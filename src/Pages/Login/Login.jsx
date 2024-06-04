@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { FaGoogle } from "react-icons/fa";
 
 const Login = () => {
   const { user, setUser, googleLogin, signIn } = useContext(AuthContext);
@@ -19,14 +21,27 @@ const Login = () => {
     const password = data.password;
     signIn(email, password)
       .then((res) => {
-        console.log("logged in user", res.user);
-        alert("Login Successfull");
+        // console.log("logged in user", res.user);
+        Swal.fire("Login Successfull");
         reset();
         nevigate("/");
       })
       .catch((err) => {
-        console.log("Error in logging in", err.message);
-        alert("Login failed. Recheck your email and password");
+        // console.log("Error in logging in", err.message);
+        Swal.fire("Login failed. Recheck your email and password");
+      });
+  };
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then((res) => {
+        // console.log("Google Login Done, User", res.user);
+        Swal.fire("Google Login Completed");
+        nevigate("/");
+      })
+      .catch((err) => {
+        // console.log("Google login error: ", err.message);
+        Swal.fire("Google Login Failed");
+        return;
       });
   };
 
@@ -82,6 +97,14 @@ const Login = () => {
             </Link>
           </span>
         </form>
+        <div>
+          <button
+            onClick={handleGoogleLogin}
+            className="btn btn-sm w-full px-2 my-2"
+          >
+            <FaGoogle className="text-primary" /> Login With Google
+          </button>
+        </div>
       </div>
     </div>
   );

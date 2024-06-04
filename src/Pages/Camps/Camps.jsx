@@ -40,6 +40,7 @@ const Camps = () => {
       setCols(2);
     }
   };
+  console.log(cols);
   return (
     <div className="mx-10">
       <MenuCover
@@ -137,7 +138,7 @@ const Camps = () => {
           </div>
         </div>
       </div>
-      <div className={`grid md:grid-cols-2 lg:grid-cols-${cols} gap-4 my-10`}>
+      <div className={`grid grid-cols-1 md:grid-cols-${cols} gap-4 my-10`}>
         {sortedCamps.map((camp) => (
           <Camp key={camp._id} camp={camp} />
         ))}
