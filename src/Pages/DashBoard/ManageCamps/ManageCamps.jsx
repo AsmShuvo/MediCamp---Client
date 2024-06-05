@@ -2,6 +2,7 @@ import React from "react";
 import useCamps from "../../../hooks/useCamps";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const ManageCamps = () => {
   const [camps, refetch] = useCamps();
@@ -59,6 +60,7 @@ const ManageCamps = () => {
               const dateTime = new Date(camp.date_time);
               const dateString = dateTime.toDateString();
               const timeString = dateTime.toLocaleTimeString();
+              console.log(camp);
 
               return (
                 <tr
@@ -78,12 +80,9 @@ const ManageCamps = () => {
                   <td className="px-6 py-4">{camp.healthcare_professional}</td>
                   <td className="px-6 py-4">
                     <div>
-                      <button
-                        onClick={() => handleUpdateCamp(camp._id)}
-                        className="btn btn-link"
-                      >
-                        Edit
-                      </button>
+                      <Link to={`/dashboard/campUpdate/${camp._id}`}>
+                        <button className="btn btn-link">Edit</button>
+                      </Link>
                       <button
                         onClick={() => handleDeleteCamp(camp._id)}
                         className="btn btn-link"
