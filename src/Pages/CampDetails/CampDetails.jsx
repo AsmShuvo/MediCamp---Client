@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext, useState, useRef } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useAxiosSecure from "./../../hooks/useAxiosSecure";
 import { AuthContext } from "./../../Providers/AuthProvider";
@@ -7,6 +7,10 @@ import Swal from "sweetalert2";
 import axios from "axios";
 
 const CampDetails = () => {
+  useEffect(() => {
+    document.title = "Medicamp | Camp details";
+  }, []);
+  const nevigate = useNavigate();
   const serverUrl = import.meta.env.VITE_SERVER_URL;
   console.log(serverUrl);
   const axiosSecure = useAxiosSecure();
@@ -90,12 +94,12 @@ const CampDetails = () => {
       participant_count: participant_count + 1,
       description,
     };
-    const nevigate = useNavigate();
+
     axios.post(`${serverUrl}/participants`, newParticipant).then((data) => {
       if (data.data.insertedId) {
         Swal.fire("Application successful");
         form.reset();
-        nevigate("/camps");
+        nevigate("/availableCamps");
       }
     });
 

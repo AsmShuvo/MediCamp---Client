@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { updateProfile } from "firebase/auth";
@@ -11,6 +11,9 @@ import useAxiosPublic from "./../../hooks/useAxiosPublic";
 const imageHostingApi = `https://api.imgbb.com/1/upload?key=${imagebbKey}`;
 
 const RegisterForm = () => {
+  useEffect(() => {
+    document.title = "Medicamp | Register";
+  }, []);
   const { createUser, logOut, user, setUser } = useContext(AuthContext);
   const nevigate = useNavigate();
   const axiosSecure = useAxiosSecure();

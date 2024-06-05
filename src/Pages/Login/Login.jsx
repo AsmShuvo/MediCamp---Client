@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,6 +6,9 @@ import Swal from "sweetalert2";
 import { FaGoogle } from "react-icons/fa";
 
 const Login = () => {
+  useEffect(() => {
+    document.title = "Medicamp | Login";
+  }, []);
   const { user, setUser, googleLogin, signIn } = useContext(AuthContext);
   const nevigate = useNavigate();
   const {

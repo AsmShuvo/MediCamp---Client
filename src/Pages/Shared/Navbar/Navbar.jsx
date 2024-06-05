@@ -63,7 +63,7 @@ const Navbar = () => {
             href="https://flowbite.com/"
             className="flex items-center space-x-3 rtl:space-x-reverse"
           >
-            <FaHandHoldingMedical className="text-5xl" />
+            <FaHandHoldingMedical className="text-5xl bg-orange-700 text-primary rounded-bl-3xl rounded-br-3xl rounded-tl-3xl p-2" />
             <span className="self-center text-3xl font-extrabold whitespace-nowrap text-primary">
               MEDI<span className="text-secondary text-2xl">CAMP</span>
             </span>
