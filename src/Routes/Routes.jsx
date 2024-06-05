@@ -12,6 +12,7 @@ import Cart from "../Pages/DashBoard/Dashboard/Cart/Cart";
 import Profile from "../Pages/DashBoard/Profile/Profile";
 import AdminProfile from "../Pages/DashBoard/Profile/AdminProfile";
 import AddCamp from "./../Pages/DashBoard/AddItems/AddItems";
+import ManageCamps from "../Pages/DashBoard/ManageCamps/ManageCamps";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -76,6 +77,10 @@ export const router = createBrowserRouter([
       {
         path: "addCamp",
         element: <AddCamp />,
+      },
+      {
+        path: "manageCamps",
+        element: <ManageCamps />,
       },
     ],
   },
