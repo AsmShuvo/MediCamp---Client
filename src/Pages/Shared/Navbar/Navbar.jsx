@@ -10,13 +10,13 @@ import useCarts from "./../../../hooks/useCart";
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [carts] = useCarts();
-  console.log(carts);
+  //console.log(carts);
   const myCarts = carts?.filter(
     (item) => item.participant_email == user?.email
   );
-  console.log(user?.displayName);
-  console.log(user?.email);
-  console.log(myCarts);
+  //console.log(user?.displayName);
+  //console.log(user?.email);
+  //console.log(myCarts);
   return (
     <div className="">
       <div className="navbar bg-[#0007] fixed z-10">

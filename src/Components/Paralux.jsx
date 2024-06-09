@@ -1,7 +1,7 @@
 import React from "react";
 
 const Paralux = ({ image, title, desc }) => {
-  console.log("called");
+  //console.log("called");
   return (
     <div
       className="h-[400px] w-5/6 mx-auto flex rounded-md justify-center items-center text-center bg-cover bg-fixed bg-center mt-16 mt-8"

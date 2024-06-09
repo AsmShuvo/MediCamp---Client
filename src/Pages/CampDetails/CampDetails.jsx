@@ -12,7 +12,7 @@ const CampDetails = () => {
   }, []);
   const nevigate = useNavigate();
   const serverUrl = import.meta.env.VITE_SERVER_URL;
-  console.log(serverUrl);
+  //console.log(serverUrl);
   const axiosSecure = useAxiosSecure();
   const { id } = useParams();
   const [showForm, setShowForm] = useState(false);
@@ -82,7 +82,7 @@ const CampDetails = () => {
       phone,
       em_phone,
     };
-    console.log("New Participant:", newParticipant);
+    //console.log("New Participant:", newParticipant);
 
     const updatedCamp = {
       name,
@@ -105,7 +105,7 @@ const CampDetails = () => {
 
     axios.put(`${serverUrl}/participants/${id}`, updatedCamp).then((data) => {
       if (data.data.modifiedCount) {
-        console.log("Camp Updated...!");
+        //console.log("Camp Updated...!");
       }
     });
   };

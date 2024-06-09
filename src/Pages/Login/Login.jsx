@@ -19,30 +19,30 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    //console.log(data);
     const email = data.email;
     const password = data.password;
     signIn(email, password)
       .then((res) => {
-        // console.log("logged in user", res.user);
+        // //console.log("logged in user", res.user);
         Swal.fire("Login Successfull");
         reset();
         nevigate("/");
       })
       .catch((err) => {
-        // console.log("Error in logging in", err.message);
+        // //console.log("Error in logging in", err.message);
         Swal.fire("Login failed. Recheck your email and password");
       });
   };
   const handleGoogleLogin = () => {
     googleLogin()
       .then((res) => {
-        // console.log("Google Login Done, User", res.user);
+        // //console.log("Google Login Done, User", res.user);
         Swal.fire("Google Login Completed");
         nevigate("/");
       })
       .catch((err) => {
-        // console.log("Google login error: ", err.message);
+        // //console.log("Google login error: ", err.message);
         Swal.fire("Google Login Failed");
         return;
       });

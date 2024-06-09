@@ -7,9 +7,9 @@ import { Link } from "react-router-dom";
 const ManageCamps = () => {
   const [camps, refetch] = useCamps();
   const axiosSecure = useAxiosSecure();
-  console.log("In managecamps", camps);
+  //console.log("In managecamps", camps);
   const handleDeleteCamp = (id) => {
-    console.log(id);
+    //console.log(id);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -60,7 +60,7 @@ const ManageCamps = () => {
               const dateTime = new Date(camp.date_time);
               const dateString = dateTime.toDateString();
               const timeString = dateTime.toLocaleTimeString();
-              console.log(camp);
+              //console.log(camp);
 
               return (
                 <tr

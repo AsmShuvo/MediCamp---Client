@@ -16,7 +16,7 @@ const useCamps = () => {
       return res.data;
     },
   });
-  console.log("fetched camps:", camps);
+  //console.log("fetched camps:", camps);
   return [camps, refetch, isLoading, error];
 };
 

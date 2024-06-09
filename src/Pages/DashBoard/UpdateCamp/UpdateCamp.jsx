@@ -7,13 +7,13 @@ import useCamps from "../../../hooks/useCamps";
 
 const UpdateCamp = () => {
   const { id } = useParams();
-  console.log(id);
+  //console.log(id);
   const axiosSecure = useAxiosSecure();
   const [camps] = useCamps();
 
-  console.log(camps);
+  //console.log(camps);
   const prevCamp = camps?.find((camp) => camp._id == id);
-  console.log(prevCamp);
+  //console.log(prevCamp);
   const handleUpdate = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -35,9 +35,9 @@ const UpdateCamp = () => {
       description,
       participant_count: prevCamp.participant_count,
     };
-    console.log(updatedCamp);
+    //console.log(updatedCamp);
     axiosSecure.put(`/camps/${id}`, updatedCamp).then((data) => {
-      console.log(data.data);
+      //console.log(data.data);
       if (data.data.modifiedCount) {
         Swal.fire("Camp updated successfully");
       }

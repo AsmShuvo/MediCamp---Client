@@ -28,7 +28,7 @@ const RegisterForm = () => {
   const password = watch("password");
 
   const onSubmit = async (data) => {
-    console.log(data.email);
+    //console.log(data.email);
     const email = data.email;
     const name = data.username;
     const password = data.password;
@@ -46,39 +46,39 @@ const RegisterForm = () => {
     axiosSecure
       .post("/users", registeredUser)
       .then((data) => {
-        console.log("new User posted to DB");
+        //console.log("new User posted to DB");
       })
       .catch((err) => {
-        console.log("err while posting user on DB");
+        //console.log("err while posting user on DB");
       });
 
-    console.log(registeredUser);
+    //console.log(registeredUser);
     createUser(email, password)
       .then((res) => {
-        console.log("Logged in user", res.user);
+        //console.log("Logged in user", res.user);
         const userCredential = res.user;
         updateProfile(userCredential, {
           displayName: name,
           photoURL: image,
         })
           .then(() => {
-            console.log("Creaetd user : ", userCredential);
-            console.log(userCredential.email);
-            console.log(userCredential.displayName);
-            console.log(userCredential.photoURL);
+            //console.log("Creaetd user : ", userCredential);
+            //console.log(userCredential.email);
+            //console.log(userCredential.displayName);
+            //console.log(userCredential.photoURL);
             Swal.fire("Registration Successfuil");
             reset();
             logOut();
             nevigate("/login");
           })
           .catch((err) => {
-            console.log("Error while updating profile: ", err);
+            //console.log("Error while updating profile: ", err);
             Swal.fire("Profile is not updated");
             return;
           });
       })
       .catch((err) => {
-        console.log("Err: ", err);
+        //console.log("Err: ", err);
         Swal.fire("Registration Failed! Your email is already in use");
         return;
       });

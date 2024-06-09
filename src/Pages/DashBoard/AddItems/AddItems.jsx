@@ -26,7 +26,7 @@ const AddCamp = () => {
       description,
       image,
     };
-    console.log(newItem);
+    //console.log(newItem);
     axiosPublic
       .post("/camps", newItem)
       .then((data) => {
@@ -36,7 +36,7 @@ const AddCamp = () => {
         }
       })
       .catch((err) => {
-        console.log("Error while adding item", err.message);
+        //console.log("Error while adding item", err.message);
       });
   };
 

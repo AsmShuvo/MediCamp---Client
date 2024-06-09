@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import useAxiosSecure from "./useAxiosSecure";
+import { AuthContext } from "../Providers/AuthProvider";
 
 const useCarts = () => {
   const axiosSecure = useAxiosSecure();
+  const { user } = useContext(AuthContext);
   const {
     data: carts,
     refetch,
@@ -16,8 +18,7 @@ const useCarts = () => {
       return res.data;
     },
   });
-  console.log("All participants:", carts);
-  return [carts, refetch, isLoading, error]; 
+  return [carts, refetch, isLoading, error];
 };
 
 export default useCarts;

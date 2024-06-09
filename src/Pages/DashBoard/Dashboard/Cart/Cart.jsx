@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import useCarts from "../../../../hooks/useCart";
 import { AuthContext } from "../../../../Providers/AuthProvider";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const [carts] = useCarts();
@@ -9,14 +10,14 @@ const Cart = () => {
   // Ensure carts and user are defined before filtering
   const myCart =
     carts?.filter((cart) => cart.participant_email === user?.email) || [];
-  console.log("My cart", myCart);
+  //console.log("My cart", myCart);
 
   // Calculate total price safely
   const totalPrice = myCart?.reduce((total, cart) => {
     const fee = cart.campFee || 0;
     return total + (isNaN(fee) ? 0 : fee);
   }, 0);
-  console.log(totalPrice);
+  //console.log(totalPrice);
 
   return (
     <div>
@@ -30,58 +31,61 @@ const Cart = () => {
       </div>
       {/* table starts here */}
       <div className="m-10">
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-          <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" className="px-6 py-3">
                   Camp name
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" className="px-6 py-3">
                   Fees
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" className="px-6 py-3">
                   Location
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" className="px-6 py-3">
                   Payment Status
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" className="px-6 py-3">
                   Payment Confirmation Status
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" className="px-6 py-3">
                   Action
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" className="px-6 py-3">
                   Feedback
                 </th>
               </tr>
             </thead>
             <tbody>
               {myCart.map((cart) => (
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <tr
+                  key={cart._id}
+                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                >
                   <th
                     scope="row"
-                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
                     {cart.name}
                   </th>
-                  <td class="px-6 py-4">${cart.campFee}</td>
-                  <td class="px-6 py-4">{cart.location}</td>
-                  <td class="px-6 py-4">=</td>
-                  <td class="px-6 py-4">=</td>
-                  <td class="px-6 py-4">
+                  <td className="px-6 py-4">${cart.campFee}</td>
+                  <td className="px-6 py-4">{cart.location}</td>
+                  <td className="px-6 py-4">=</td>
+                  <td className="px-6 py-4">=</td>
+                  <td className="px-6 py-4">
                     <div
                       href="#"
-                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                     >
                       Cancel
                     </div>
                   </td>
-                  <td class="px-6 py-4">
+                  <td className="px-6 py-4">
                     <div
                       href="#"
-                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                     >
                       Show
                     </div>
@@ -92,6 +96,28 @@ const Cart = () => {
           </table>
         </div>
       </div>
+      {myCart?.length ? (
+        <>
+          <div className="text-center">
+            <Link to="/dashboard/payment">
+              <button className="btn bg-gradient-to-r border-none from-gray-700 to-gray-800 hover:transfor hover:scale-105 text-white font-bold tracking-widest btn-wide ">
+                PAY
+              </button>
+            </Link>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="text-center">
+            <button
+              disabled
+              className="btn bg-gradient-to-r border-none from-gray-700 to-gray-800 hover:transfor hover:scale-105 text-white font-bold tracking-widest btn-wide "
+            >
+              PAY
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 };

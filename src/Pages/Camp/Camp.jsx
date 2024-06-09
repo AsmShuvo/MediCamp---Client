@@ -18,8 +18,8 @@ const Camp = ({ camp }) => {
   const dateTime = new Date(date_time);
   const dateString = dateTime.toDateString();
   const timeString = dateTime.toLocaleTimeString();
-  console.log(dateString);
-  console.log(timeString);
+  //console.log(dateString);
+  //console.log(timeString);
   return (
     <div className="max-w-sm mx-auto bg-white border border-gray-200 rounded-lg shadow ">
       <div>
@@ -72,9 +72,9 @@ const Camp = ({ camp }) => {
             >
               <path
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M1 5h12m0 0L9 1m4 4L9 9"
               />
             </svg>
