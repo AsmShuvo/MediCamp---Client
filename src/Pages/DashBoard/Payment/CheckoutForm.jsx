@@ -3,6 +3,8 @@ import React, { useContext, useEffect, useState } from "react";
 import useAxiosSecure from "./../../../hooks/useAxiosSecure";
 import useCarts from "./../../../hooks/useCart";
 import { AuthContext } from "../../../Providers/AuthProvider";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = () => {
   const { user } = useContext(AuthContext);
@@ -12,7 +14,8 @@ const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
-  const [carts] = useCarts();
+  const [carts, refetch] = useCarts();
+  const navigate = useNavigate();
   const myCart =
     carts?.filter((cart) => cart.participant_email === user?.email) || [];
   console.log(myCart.length);
@@ -23,7 +26,7 @@ const CheckoutForm = () => {
     }
     return total;
   }, 0);
-  console.log(totalPrice);
+  // console.log(totalPrice);
 
   useEffect(() => {
     if (totalPrice > 0) {
@@ -85,6 +88,11 @@ const CheckoutForm = () => {
         };
         const res = await axiosSecure.post("/payments", payment);
         console.log("payment saved", res.data);
+        refetch();
+        if (res.data?.paymentResult?.insertedId) {
+          Swal.fire({ title: "Payment Successful..!", timer: 1500 });
+          navigate("/dashboard/paymentHistory");
+        }
       }
     }
   };

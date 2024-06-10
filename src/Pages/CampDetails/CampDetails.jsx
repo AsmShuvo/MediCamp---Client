@@ -82,7 +82,7 @@ const CampDetails = () => {
       phone,
       em_phone,
     };
-    //console.log("New Participant:", newParticipant);
+    console.log("New Participant:", newParticipant);
 
     const updatedCamp = {
       name,

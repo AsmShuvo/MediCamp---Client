@@ -6,10 +6,14 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import { FaCartPlus } from "react-icons/fa6";
 import useCarts from "./../../../hooks/useCart";
+import { useAdmin } from "../../../hooks/useAdmin";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [carts] = useCarts();
+  const { isAdmin, loading } = useAdmin();
+  console.log(isAdmin);
+
   //console.log(carts);
   const myCarts = carts?.filter(
     (item) => item.participant_email == user?.email
@@ -52,11 +56,13 @@ const Navbar = () => {
                   AVAILABLE CAMPS <IoIosArrowForward />
                 </NavLink>
               </li>
-              <li className="text-xl font-semibold">
-                <NavLink to="/login">
-                  JOIN US <GrAdd />
-                </NavLink>
-              </li>
+              {!user && (
+                <li className="text-xl font-semibold">
+                  <NavLink to="/login">
+                    JOIN US <GrAdd />
+                  </NavLink>
+                </li>
+              )}
             </ul>
           </div>
           <a
@@ -81,6 +87,22 @@ const Navbar = () => {
                 AVAILABLE CAMPS <IoIosArrowForward />
               </NavLink>
             </li>
+            {user && isAdmin && (
+              <li className="text-xl font-semibold">
+                <NavLink className="text-white" to="/dashboard/adminHome">
+                  Admin Home
+                  <IoIosArrowForward />
+                </NavLink>
+              </li>
+            )}
+            {user && !isAdmin && (
+              <li className="text-xl font-semibold">
+                <NavLink className="text-white" to="/dashboard/userHome">
+                  User Home
+                  <IoIosArrowForward />
+                </NavLink>
+              </li>
+            )}
             {!user && (
               <li className="text-xl font-semibold">
                 <NavLink className="text-white" to="/login">

@@ -84,7 +84,7 @@ const Dashboard = () => {
                 <li>
                   <NavLink
                     className="flex items-center gap-1"
-                    to="paymentHistory"
+                    to="/dashboard/paymentHistory"
                   >
                     <MdOutlinePayments /> Payment History
                   </NavLink>

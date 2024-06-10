@@ -15,6 +15,9 @@ import AddCamp from "./../Pages/DashBoard/AddItems/AddItems";
 import ManageCamps from "../Pages/DashBoard/ManageCamps/ManageCamps";
 import UpdateCamp from "../Pages/DashBoard/UpdateCamp/UpdateCamp";
 import Payment from "../Pages/DashBoard/Payment/Payment";
+import PaymentHistory from "../Pages/DashBoard/PaymentHistory/PaymentHistory";
+import UserHome from "../Pages/DashBoard/UserHome/UserHome";
+import AdminHome from "../Pages/DashBoard/AdminHome/AdminHome";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -91,6 +94,18 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/payment",
         element: <Payment />,
+      },
+      {
+        path: "/dashboard/paymentHistory",
+        element: <PaymentHistory />,
+      },
+      {
+        path: "/dashboard/userHome",
+        element: <UserHome />,
+      },
+      {
+        path: "/dashboard/adminHome",
+        element: <AdminHome />,
       },
     ],
   },
