@@ -19,7 +19,7 @@ const PaymentHistory = () => {
     payments?.map((payment, idx) => console.log(payment.price));
   }
   return (
-    <div className="p-4">
+    <div className="p-4 mx-10">
       <h2 className="text-3xl text-center">
         Total Payments: {payments?.length}
       </h2>
@@ -30,7 +30,6 @@ const PaymentHistory = () => {
               <th>#</th>
               <th>Price</th>
               <th>TRX ID</th>
-              <th>Favorite Color</th>
             </tr>
           </thead>
           <tbody>
@@ -39,7 +38,6 @@ const PaymentHistory = () => {
                 <th>{idx + 1}</th>
                 <td>${payment.price}</td>
                 <td>{payment.transactionId}</td>
-                <td>Blue</td>
               </tr>
             ))}
           </tbody>

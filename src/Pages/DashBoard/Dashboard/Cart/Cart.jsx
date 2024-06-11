@@ -2,23 +2,40 @@ import React, { useContext } from "react";
 import useCarts from "../../../../hooks/useCart";
 import { AuthContext } from "../../../../Providers/AuthProvider";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../../../hooks/useAxiosPublic";
 
 const Cart = () => {
   const [carts] = useCarts();
   const { user } = useContext(AuthContext);
 
-  // Ensure carts and user are defined before filtering
+  const axiosSecure = useAxiosPublic();
+  const { data: regedCamps = [] } = useQuery({
+    queryKey: ["payments", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/payments/${user?.email}`);
+      return res.data;
+    },
+  });
+  console.log(regedCamps);
+  console.log(regedCamps[0]?.cartFees[0]);
+  const regedCampsWithFees = regedCamps?.flatMap((item) => {
+    return item?.cartNames.map((name, idx) => {
+      return {
+        name,
+        fees: item.cartFees[idx],
+        status: item?.status,
+      };
+    });
+  });
+  console.log(regedCampsWithFees);
+
   const myCart =
     carts?.filter((cart) => cart.participant_email === user?.email) || [];
-  //console.log("My cart", myCart);
-
-  // Calculate total price safely
   const totalPrice = myCart?.reduce((total, cart) => {
     const fee = cart.campFee || 0;
     return total + (isNaN(fee) ? 0 : fee);
   }, 0);
-  //console.log(totalPrice);
-
   return (
     <div>
       <div className="flex justify-evenly mt-4 font-serif">
@@ -42,9 +59,6 @@ const Cart = () => {
                   Fees
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Location
-                </th>
-                <th scope="col" className="px-6 py-3">
                   Payment Status
                 </th>
                 <th scope="col" className="px-6 py-3">
@@ -59,6 +73,39 @@ const Cart = () => {
               </tr>
             </thead>
             <tbody>
+              {regedCampsWithFees?.length}
+              {regedCampsWithFees?.map((camp, id) => (
+                <tr
+                  key={camp.id}
+                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                >
+                  <th
+                    scope="row"
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    {camp.name}
+                  </th>
+                  <td className="px-6 py-4"> ${camp.fees} </td>
+                  <td className="px-6 py-4">Paid </td>
+                  <td className="px-6 py-4"> {camp.status} </td>
+                  <td className="px-6 py-4">
+                    <div
+                      href="#"
+                      className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                    >
+                      Cancel
+                    </div>
+                  </td>
+                  <td className="px-6 py-4">
+                    <div
+                      href="#"
+                      className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                    >
+                      Show
+                    </div>
+                  </td>
+                </tr>
+              ))}
               {myCart.map((cart) => (
                 <tr
                   key={cart._id}
@@ -68,12 +115,11 @@ const Cart = () => {
                     scope="row"
                     className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
-                    {cart.name}
+                    {cart.camp_name}
                   </th>
                   <td className="px-6 py-4">${cart.campFee}</td>
-                  <td className="px-6 py-4">{cart.location}</td>
-                  <td className="px-6 py-4">=</td>
-                  <td className="px-6 py-4">=</td>
+                  <td className="px-6 py-4">{cart.status}</td>
+                  <td className="px-6 py-4">{cart.confirmation}</td>
                   <td className="px-6 py-4">
                     <div
                       href="#"

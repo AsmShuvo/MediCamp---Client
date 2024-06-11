@@ -18,7 +18,7 @@ const CheckoutForm = () => {
   const navigate = useNavigate();
   const myCart =
     carts?.filter((cart) => cart.participant_email === user?.email) || [];
-  console.log(myCart.length);
+  console.log(myCart);
 
   const totalPrice = myCart?.reduce((total, item) => {
     if (item && item.campFee) {
@@ -84,8 +84,11 @@ const CheckoutForm = () => {
           transactionId: paymentIntent.id,
           date: new Date(), // utc date convert needed, momentJs
           cartIds: myCart.map((item) => item._id),
+          cartNames: myCart.map((item) => item.camp_name),
+          cartFees: myCart.map((item) => item.campFee),
           status: "pending",
         };
+        // console.log(payment.cartIds);
         const res = await axiosSecure.post("/payments", payment);
         console.log("payment saved", res.data);
         refetch();

@@ -6,7 +6,7 @@ const AdminHome = () => {
   return (
     <div>
       <h2 className="text-3xl">
-        <span>Welcome</span>
+        <span>Welcome </span>
         {user?.displayName ? user?.displayName : "Back"}
       </h2>
     </div>

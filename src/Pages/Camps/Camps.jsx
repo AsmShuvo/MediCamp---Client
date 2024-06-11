@@ -138,7 +138,7 @@ const Camps = () => {
           </div>
         </div>
       </div>
-      <div className={`grid grid-cols-1 md:grid-cols-${cols} gap-4 my-10`}>
+      <div className={`grid grid-cols-1 md:grid-cols-3 gap-4 my-10`}>
         {sortedCamps.map((camp) => (
           <Camp key={camp._id} camp={camp} />
         ))}

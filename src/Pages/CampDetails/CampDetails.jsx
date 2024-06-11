@@ -81,6 +81,8 @@ const CampDetails = () => {
       gender,
       phone,
       em_phone,
+      status: "Pending",
+      confirmation: "Pending",
     };
     console.log("New Participant:", newParticipant);
 

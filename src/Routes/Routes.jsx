@@ -18,6 +18,7 @@ import Payment from "../Pages/DashBoard/Payment/Payment";
 import PaymentHistory from "../Pages/DashBoard/PaymentHistory/PaymentHistory";
 import UserHome from "../Pages/DashBoard/UserHome/UserHome";
 import AdminHome from "../Pages/DashBoard/AdminHome/AdminHome";
+import Stats from "./../Stats";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -106,6 +107,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/adminHome",
         element: <AdminHome />,
+      },
+      {
+        path: "/dashboard/analytics",
+        element: <Stats />,
       },
     ],
   },
