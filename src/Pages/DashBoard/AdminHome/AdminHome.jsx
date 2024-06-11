@@ -2,6 +2,9 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
 
 const AdminHome = () => {
+  useEffect(() => {
+    document.title = "Medicamp | Admin Home";
+  }, []);
   const { user } = useContext(AuthContext);
   return (
     <div>
