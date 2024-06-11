@@ -3,6 +3,9 @@ import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 
 const AddCamp = () => {
+  useEffect(() => {
+    document.title = "Medicamp | Add Items";
+  }, []);
   const axiosPublic = useAxiosPublic();
   const handleSubmit = (e) => {
     e.preventDefault();
