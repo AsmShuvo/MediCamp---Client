@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useAxiosPublic from "../../../../hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 
 const Analytics = () => {
+  useEffect(() => {
+    document.title = "Medicamp | Analytics";
+  }, []);
   const axiosSecure = useAxiosPublic();
   const {
     data: regCamps,
