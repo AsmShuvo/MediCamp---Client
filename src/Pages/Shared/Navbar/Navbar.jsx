@@ -10,7 +10,7 @@ import { useAdmin } from "../../../hooks/useAdmin";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
-  const [carts] = useCarts();
+  const [carts, refetch] = useCarts();
   const { isAdmin, loading } = useAdmin();
   console.log(isAdmin);
 
@@ -18,9 +18,6 @@ const Navbar = () => {
   const myCarts = carts?.filter(
     (item) => item.participant_email == user?.email
   );
-  //console.log(user?.displayName);
-  //console.log(user?.email);
-  //console.log(myCarts);
   return (
     <div className="">
       <div className="navbar bg-[#0007] fixed z-10">

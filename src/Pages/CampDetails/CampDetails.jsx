@@ -5,6 +5,7 @@ import useAxiosSecure from "./../../hooks/useAxiosSecure";
 import { AuthContext } from "./../../Providers/AuthProvider";
 import Swal from "sweetalert2";
 import axios from "axios";
+import useCarts from "../../hooks/useCart";
 
 const CampDetails = () => {
   useEffect(() => {
@@ -17,6 +18,7 @@ const CampDetails = () => {
   const { id } = useParams();
   const [showForm, setShowForm] = useState(false);
   const formRef = useRef(null);
+  const [refetch] = useCarts();
 
   const handleShowForm = () => {
     setShowForm((prevShowForm) => {
@@ -110,6 +112,7 @@ const CampDetails = () => {
         //console.log("Camp Updated...!");
       }
     });
+    refetch();
   };
 
   return (

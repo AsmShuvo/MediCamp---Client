@@ -4,19 +4,48 @@ import { AuthContext } from "../../../../Providers/AuthProvider";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../../hooks/useAxiosPublic";
+import { MdOutlineDone } from "react-icons/md";
+import { ImCross } from "react-icons/im";
+import Swal from "sweetalert2";
 
 const Cart = () => {
-  const [carts] = useCarts();
+  const [carts, refetch] = useCarts();
   const { user } = useContext(AuthContext);
 
   const axiosSecure = useAxiosPublic();
-  const { data: regedCamps = [] } = useQuery({
+  const { data: regedCamps = [], refetch: refetchPayment } = useQuery({
     queryKey: ["payments", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/payments/${user?.email}`);
       return res.data;
     },
   });
+
+  const handleDeleteCartItem = (id) => {
+    console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, cancel it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .delete(`/participants/${id}/${user?.email}`)
+          .then((data) => {
+            console.log(data);
+            if (data.data.deletedCount) {
+              Swal.fire("Camp cancelled successfully");
+              refetch();
+            }
+          });
+      }
+    });
+  };
+
   console.log(regedCamps);
   console.log(regedCamps[0]?.cartFees[0]);
   const regedCampsWithFees = regedCamps?.flatMap((item) => {
@@ -73,25 +102,27 @@ const Cart = () => {
               </tr>
             </thead>
             <tbody>
-              {regedCampsWithFees?.length}
-              {regedCampsWithFees?.map((camp, id) => (
+              {myCart.map((cart) => (
                 <tr
-                  key={camp.id}
-                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                  key={cart._id}
+                  className="border-b texce bg-gray-800 dark:border-gray-700"
                 >
                   <th
                     scope="row"
                     className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
-                    {camp.name}
+                    {cart.camp_name}
                   </th>
-                  <td className="px-6 py-4"> ${camp.fees} </td>
-                  <td className="px-6 py-4">Paid </td>
-                  <td className="px-6 py-4"> {camp.status} </td>
+                  <td className="px-6 py-4">${cart.campFee}</td>
+                  <td className="px-6 py-4">{cart.status}</td>
+                  <td className="pl-10 py-4">
+                    <ImCross />
+                  </td>
                   <td className="px-6 py-4">
                     <div
+                      onClick={() => handleDeleteCartItem(cart._id)}
                       href="#"
-                      className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      className="font-medium cursor-pointer text-blue-600 dark:text-blue-500 hover:underline"
                     >
                       Cancel
                     </div>
@@ -106,26 +137,26 @@ const Cart = () => {
                   </td>
                 </tr>
               ))}
-              {myCart.map((cart) => (
-                <tr
-                  key={cart._id}
-                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                >
+              {regedCampsWithFees?.map((camp, id) => (
+                <tr key={camp.id} className="  border-b bg-gray-950 ">
                   <th
                     scope="row"
                     className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
-                    {cart.camp_name}
+                    {camp.name}
                   </th>
-                  <td className="px-6 py-4">${cart.campFee}</td>
-                  <td className="px-6 py-4">{cart.status}</td>
-                  <td className="px-6 py-4">{cart.confirmation}</td>
+                  <td className="px-6 py-4"> ${camp.fees} </td>
+                  <td className="px-6 py-4 flex items-center gap-1">
+                    Paid{" "}
+                    <MdOutlineDone className="text-green-500 border border-green-500 rounded-full" />{" "}
+                  </td>
+                  <td className="px-6 py-4"> {camp.status} </td>
                   <td className="px-6 py-4">
                     <div
                       href="#"
-                      className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      className="font-medium text-blue-600 pl-4 dark:text-blue-500 hover:underline"
                     >
-                      Cancel
+                      -
                     </div>
                   </td>
                   <td className="px-6 py-4">
