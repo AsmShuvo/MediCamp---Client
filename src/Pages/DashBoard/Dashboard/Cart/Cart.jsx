@@ -7,6 +7,7 @@ import useAxiosPublic from "../../../../hooks/useAxiosPublic";
 import { MdOutlineDone } from "react-icons/md";
 import { ImCross } from "react-icons/im";
 import Swal from "sweetalert2";
+import SecTitle from "./../../../../Components/SecTitle";
 
 const Cart = () => {
   const [carts, refetch] = useCarts();
@@ -20,6 +21,7 @@ const Cart = () => {
       return res.data;
     },
   });
+  
 
   const handleDeleteCartItem = (id) => {
     console.log(id);
@@ -68,11 +70,8 @@ const Cart = () => {
   return (
     <div>
       <div className="flex justify-evenly mt-4 font-serif">
-        <h2 className="text-3xl text-white rounded-full px-4 py-1 bg-secondary">
-          Registered Camps: {myCart?.length}
-        </h2>
         <h2 className="text-3xl text-gray-800 rounded-full px-4 py-1 bg-primary">
-          Total Price: ${totalPrice}
+          Total Price Unpaid: ${totalPrice}
         </h2>
       </div>
       {/* table starts here */}
