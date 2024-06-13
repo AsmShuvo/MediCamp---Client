@@ -46,12 +46,18 @@ const ManageRegisteredCamps = () => {
       });
   };
 
+  // Reverse allCamps array
+  const reversedAllCamps = allCamps?.slice().reverse();
+
   // Pagination logic
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = allCamps?.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = reversedAllCamps?.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
-  const totalPages = Math.ceil((allCamps?.length || 0) / itemsPerPage);
+  const totalPages = Math.ceil((reversedAllCamps?.length || 0) / itemsPerPage);
 
   return (
     <div>

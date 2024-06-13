@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import Modal from "react-modal";
 import useCarts from "../../../../hooks/useCart";
 import { AuthContext } from "../../../../Providers/AuthProvider";
 import { Link } from "react-router-dom";
@@ -7,11 +8,16 @@ import useAxiosPublic from "../../../../hooks/useAxiosPublic";
 import { MdOutlineDone } from "react-icons/md";
 import { ImCross } from "react-icons/im";
 import Swal from "sweetalert2";
-import SecTitle from "./../../../../Components/SecTitle";
+import { FaStar } from "react-icons/fa";
 
 const Cart = () => {
   const [carts, refetch] = useCarts();
   const { user } = useContext(AuthContext);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [feedback, setFeedback] = useState("");
+  const [selectedCamp, setSelectedCamp] = useState(null);
+  const [rating, setRating] = useState(0);
+  const [hover, setHover] = useState(null);
 
   const axiosSecure = useAxiosPublic();
   const { data: regedCamps = [], refetch: refetchPayment } = useQuery({
@@ -21,6 +27,11 @@ const Cart = () => {
       return res.data;
     },
   });
+
+  const handleSendFeedback = (camp) => {
+    setSelectedCamp(camp);
+    setModalIsOpen(true);
+  };
 
   const handleDeleteCartItem = (id) => {
     Swal.fire({
@@ -86,6 +97,27 @@ const Cart = () => {
     }
   };
 
+  const handleSubmitFeedback = () => {
+    console.log("Feedback submitted:", feedback);
+    console.log("Rating submitted:", rating);
+    const userReview = {
+      email: user?.email,
+      name: user?.displayName,
+      feedback,
+      rating,
+    };
+    axiosSecure.post(`/reviews`, userReview).then((res) => {
+      console.log(res.data);
+      if (res.data.insertedId) {
+        Swal.fire("Thanks For your feedback");
+      }
+    });
+
+    setModalIsOpen(false);
+    setFeedback("");
+    setRating(0);
+  };
+
   return (
     <div>
       <div className="flex justify-evenly mt-4 font-serif">
@@ -145,8 +177,11 @@ const Cart = () => {
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <div className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                      Show
+                    <div
+                      onClick={() => handleSendFeedback(cart)}
+                      className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                    >
+                      -
                     </div>
                   </td>
                 </tr>
@@ -173,8 +208,11 @@ const Cart = () => {
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <div className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                      Show
+                    <div
+                      onClick={() => handleSendFeedback(camp)}
+                      className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                    >
+                      Give Feedback
                     </div>
                   </td>
                 </tr>
@@ -220,6 +258,58 @@ const Cart = () => {
           </button>
         </div>
       )}
+
+      {/* Feedback Modal */}
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={() => setModalIsOpen(false)}
+        className="flex justify-center items-center"
+      >
+        <div className="bg-white p-6 rounded-lg shadow-lg">
+          <h2 className="text-xl mb-4">Provide Feedback</h2>
+          <div className="flex mb-4">
+            {[...Array(5)].map((star, index) => {
+              const currentRating = index + 1;
+              return (
+                <button
+                  key={index}
+                  type="button"
+                  className={`text-2xl ${
+                    currentRating <= (hover || rating)
+                      ? "text-yellow-500"
+                      : "text-gray-300"
+                  }`}
+                  onClick={() => setRating(currentRating)}
+                  onMouseEnter={() => setHover(currentRating)}
+                  onMouseLeave={() => setHover(null)}
+                >
+                  <FaStar />
+                </button>
+              );
+            })}
+          </div>
+          <textarea
+            className="w-full h-40 p-2 border border-gray-300 rounded"
+            value={feedback}
+            onChange={(e) => setFeedback(e.target.value)}
+            placeholder="Enter your feedback here..."
+          ></textarea>
+          <div className="flex justify-end mt-4">
+            <button
+              onClick={() => setModalIsOpen(false)}
+              className="px-4 py-2 mr-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleSubmitFeedback}
+              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };

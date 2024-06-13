@@ -102,8 +102,10 @@ const CampDetails = () => {
     axios.post(`${serverUrl}/participants`, newParticipant).then((data) => {
       if (data.data.insertedId) {
         Swal.fire("Application successful");
+
         form.reset();
         nevigate("/availableCamps");
+        refetch();
       }
     });
 

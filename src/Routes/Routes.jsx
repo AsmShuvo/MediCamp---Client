@@ -21,6 +21,7 @@ import AdminHome from "../Pages/DashBoard/AdminHome/AdminHome";
 import ManageRegisteredCamps from "../Pages/DashBoard/ManageRegisteredCamps/ManageRegisteredCamps";
 import AdminPrivateRoute from "./AdminPrivateRoute";
 import Stats from "../Pages/DashBoard/Dashboard/Stats/Stats";
+import Reviews from "./../Pages/Reviews/Reviews";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -42,6 +43,10 @@ export const router = createBrowserRouter([
       {
         path: "/availableCamps",
         element: <Camps />,
+      },
+      {
+        path: "/reviews",
+        element: <Reviews />,
       },
       {
         path: "/camp-details/:id",

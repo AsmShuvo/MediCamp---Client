@@ -51,7 +51,6 @@ const PaymentHistory = () => {
           <thead>
             <tr className="bg-gray-700 text-white">
               <th>#</th>
-              <th>Price</th>
               <th>TRX ID</th>
               <th>Camps</th>
               <th>Price</th>
@@ -62,7 +61,6 @@ const PaymentHistory = () => {
             {paginate(payments).map((payment, idx) => (
               <tr key={payment._id}>
                 <th>{(currentPage - 1) * itemsPerPage + idx + 1}</th>
-                <td>${payment.price}</td>
                 <td>{payment.transactionId}</td>
                 <td>
                   {payment.cartNames?.map((it, idx) => (

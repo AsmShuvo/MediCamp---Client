@@ -43,10 +43,10 @@ const Footer = () => {
 
             <div className="px-5 py-2">
               <Link
-                to=""
+                to="/reviews"
                 className="text-base leading-6 text-white hover:text-secondary"
               >
-                Terms
+                Review
               </Link>
             </div>
           </nav>
