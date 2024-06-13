@@ -77,7 +77,7 @@ const Dashboard = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className="flex items-center gap-1" to="analytics">
+                  <NavLink className="flex items-center gap-1" to="/dashboard/analytics">
                     <IoMdAnalytics /> Analytics
                   </NavLink>
                 </li>

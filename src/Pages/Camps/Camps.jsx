@@ -14,6 +14,7 @@ const Camps = () => {
 
   const [camps, isLoading, error, refetch] = useCamps();
   const [sortBy, setSortBy] = useState("participants");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const sortCamps = (camps, criterion) => {
     if (!camps) return [];
@@ -31,6 +32,18 @@ const Camps = () => {
   };
 
   const sortedCamps = sortCamps(camps, sortBy);
+
+  const filteredCamps = sortedCamps.filter((camp) => {
+    if (!camp) return false;
+    const name = camp.name?.toLowerCase() ?? "";
+    const healthcareProfessional =
+      camp.healthcare_professional?.toLowerCase() ?? "";
+    return (
+      name.includes(searchQuery.toLowerCase()) ||
+      healthcareProfessional.includes(searchQuery.toLowerCase())
+    );
+  });
+
   const [cols, setCols] = useState(3);
   const hanldeCols = () => {
     if (cols == 2) {
@@ -39,8 +52,9 @@ const Camps = () => {
     if (cols == 3) {
       setCols(2);
     }
+    console.log(cols);
   };
-  //console.log(cols);
+
   return (
     <div className="mx-10">
       <MenuCover
@@ -50,7 +64,10 @@ const Camps = () => {
       />
       {/* Search and sort menu */}
       <div className="flex mt-6">
-        <form className="flex flex-1 justify-center items-center max-w-lg mx-auto bg-white">
+        <form
+          className="flex flex-1 justify-center items-center max-w-lg mx-auto bg-white"
+          onSubmit={(e) => e.preventDefault()}
+        >
           <label htmlFor="voice-search" className="sr-only">
             Search
           </label>
@@ -63,10 +80,12 @@ const Camps = () => {
               id="voice-search"
               className="bg-gray-50 border border-primary outline-none text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
               placeholder="Search camps here..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               required
             />
             <button
-              type="button"
+              type="submit"
               className="absolute inset-y-0 end-0 flex items-center pe-3"
             >
               <svg
@@ -87,7 +106,7 @@ const Camps = () => {
             </button>
           </div>
           <button
-            type="submit"
+            type="button"
             className="inline-flex  hover:bg-secondary items-center py-2.5 px-3 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 focus:ring-4 focus:outline-none hover:border-none"
           >
             <svg
@@ -138,8 +157,12 @@ const Camps = () => {
           </div>
         </div>
       </div>
-      <div className={`grid grid-cols-1 md:grid-cols-3 gap-4 my-10`}>
-        {sortedCamps.map((camp) => (
+      <div
+        className={`grid grid-cols-1   ${
+          cols == 3 ? "md:grid-cols-3" : "md:grid-cols-2"
+        } gap-4 my-10`}
+      >
+        {filteredCamps.map((camp) => (
           <Camp key={camp._id} camp={camp} />
         ))}
       </div>

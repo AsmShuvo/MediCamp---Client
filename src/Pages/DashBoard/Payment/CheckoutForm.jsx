@@ -88,7 +88,7 @@ const CheckoutForm = () => {
           cartFees: myCart.map((item) => item.campFee),
           status: "pending",
         };
-        // console.log(payment.cartIds);
+        console.log(payment);
         const res = await axiosSecure.post("/payments", payment);
         console.log("payment saved", res.data);
         refetch();

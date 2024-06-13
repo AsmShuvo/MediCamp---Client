@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import useCarts from "../../../../hooks/useCart";
 import { AuthContext } from "../../../../Providers/AuthProvider";
 import { Link } from "react-router-dom";
@@ -21,10 +21,8 @@ const Cart = () => {
       return res.data;
     },
   });
-  
 
   const handleDeleteCartItem = (id) => {
-    console.log(id);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -38,7 +36,6 @@ const Cart = () => {
         axiosSecure
           .delete(`/participants/${id}/${user?.email}`)
           .then((data) => {
-            console.log(data);
             if (data.data.deletedCount) {
               Swal.fire("Camp cancelled successfully");
               refetch();
@@ -48,8 +45,6 @@ const Cart = () => {
     });
   };
 
-  console.log(regedCamps);
-  console.log(regedCamps[0]?.cartFees[0]);
   const regedCampsWithFees = regedCamps?.flatMap((item) => {
     return item?.cartNames.map((name, idx) => {
       return {
@@ -59,7 +54,6 @@ const Cart = () => {
       };
     });
   });
-  console.log(regedCampsWithFees);
 
   const myCart =
     carts?.filter((cart) => cart.participant_email === user?.email) || [];
@@ -67,6 +61,31 @@ const Cart = () => {
     const fee = cart.campFee || 0;
     return total + (isNaN(fee) ? 0 : fee);
   }, 0);
+
+  // Pagination states and functions
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
+  const totalItems = myCart.length + regedCampsWithFees.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  const paginate = (data) => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    return data.slice(startIndex, startIndex + itemsPerPage);
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prev) => prev + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prev) => prev - 1);
+    }
+  };
+
   return (
     <div>
       <div className="flex justify-evenly mt-4 font-serif">
@@ -101,10 +120,10 @@ const Cart = () => {
               </tr>
             </thead>
             <tbody>
-              {myCart.map((cart) => (
+              {paginate(myCart).map((cart) => (
                 <tr
                   key={cart._id}
-                  className="border-b texce bg-gray-800 dark:border-gray-700"
+                  className="border-b text-gray-200 bg-gray-800 dark:border-gray-700"
                 >
                   <th
                     scope="row"
@@ -120,49 +139,41 @@ const Cart = () => {
                   <td className="px-6 py-4">
                     <div
                       onClick={() => handleDeleteCartItem(cart._id)}
-                      href="#"
                       className="font-medium cursor-pointer text-blue-600 dark:text-blue-500 hover:underline"
                     >
                       Cancel
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <div
-                      href="#"
-                      className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                    >
+                    <div className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                       Show
                     </div>
                   </td>
                 </tr>
               ))}
-              {regedCampsWithFees?.map((camp, id) => (
-                <tr key={camp.id} className="  border-b bg-gray-950 ">
+            </tbody>
+            <tbody>
+              {paginate(regedCampsWithFees).map((camp, id) => (
+                <tr key={id} className="border-b bg-gray-950">
                   <th
                     scope="row"
                     className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
                     {camp.name}
                   </th>
-                  <td className="px-6 py-4"> ${camp.fees} </td>
+                  <td className="px-6 py-4">${camp.fees}</td>
                   <td className="px-6 py-4 flex items-center gap-1">
                     Paid{" "}
-                    <MdOutlineDone className="text-green-500 border border-green-500 rounded-full" />{" "}
+                    <MdOutlineDone className="text-green-500 border border-green-500 rounded-full" />
                   </td>
-                  <td className="px-6 py-4"> {camp.status} </td>
+                  <td className="px-6 py-4">{camp.status}</td>
                   <td className="px-6 py-4">
-                    <div
-                      href="#"
-                      className="font-medium text-blue-600 pl-4 dark:text-blue-500 hover:underline"
-                    >
+                    <div className="font-medium text-blue-600 pl-4 dark:text-blue-500 hover:underline">
                       -
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <div
-                      href="#"
-                      className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                    >
+                    <div className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                       Show
                     </div>
                   </td>
@@ -171,28 +182,43 @@ const Cart = () => {
             </tbody>
           </table>
         </div>
+        <div className="flex justify-between mt-4">
+          <button
+            onClick={handlePreviousPage}
+            disabled={currentPage === 1}
+            className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
+          >
+            Previous
+          </button>
+          <span className="px-4 py-2 text-gray-700">
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+            className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
+          >
+            Next
+          </button>
+        </div>
       </div>
-      {myCart?.length ? (
-        <>
-          <div className="text-center">
-            <Link to="/dashboard/payment">
-              <button className="btn bg-gradient-to-r border-none from-gray-700 to-gray-800 hover:transfor hover:scale-105 text-white font-bold tracking-widest btn-wide ">
-                PAY
-              </button>
-            </Link>
-          </div>
-        </>
-      ) : (
-        <>
-          <div className="text-center">
-            <button
-              disabled
-              className="btn bg-gradient-to-r border-none from-gray-700 to-gray-800 hover:transfor hover:scale-105 text-white font-bold tracking-widest btn-wide "
-            >
+      {myCart.length ? (
+        <div className="text-center">
+          <Link to="/dashboard/payment">
+            <button className="btn bg-gradient-to-r border-none from-gray-700 to-gray-800 hover:transfor hover:scale-105 text-white font-bold tracking-widest btn-wide">
               PAY
             </button>
-          </div>
-        </>
+          </Link>
+        </div>
+      ) : (
+        <div className="text-center">
+          <button
+            disabled
+            className="btn bg-gradient-to-r border-none from-gray-700 to-gray-800 hover:transfor hover:scale-105 text-white font-bold tracking-widest btn-wide"
+          >
+            PAY
+          </button>
+        </div>
       )}
     </div>
   );

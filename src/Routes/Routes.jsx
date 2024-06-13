@@ -18,8 +18,9 @@ import Payment from "../Pages/DashBoard/Payment/Payment";
 import PaymentHistory from "../Pages/DashBoard/PaymentHistory/PaymentHistory";
 import UserHome from "../Pages/DashBoard/UserHome/UserHome";
 import AdminHome from "../Pages/DashBoard/AdminHome/AdminHome";
-import Stats from "./../Stats";
 import ManageRegisteredCamps from "../Pages/DashBoard/ManageRegisteredCamps/ManageRegisteredCamps";
+import AdminPrivateRoute from "./AdminPrivateRoute";
+import Stats from "../Pages/DashBoard/Dashboard/Stats/Stats";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -76,46 +77,90 @@ export const router = createBrowserRouter([
       {
         path: "adminProfile",
         element: (
-          <PrivateRoute>
-            <AdminProfile />
-          </PrivateRoute>
+          <AdminPrivateRoute>
+            <AdminProfile />{" "}
+          </AdminPrivateRoute>
         ),
       },
       {
         path: "addCamp",
-        element: <AddCamp />,
+        element: (
+          <AdminPrivateRoute>
+            <AddCamp />
+          </AdminPrivateRoute>
+        ),
       },
       {
         path: "manageCamps",
-        element: <ManageCamps />,
+        element: (
+          <AdminPrivateRoute>
+            <ManageCamps />
+          </AdminPrivateRoute>
+        ),
       },
       {
         path: "/dashboard/campUpdate/:id",
-        element: <UpdateCamp />,
+        element: (
+          <AdminPrivateRoute>
+            <UpdateCamp />
+          </AdminPrivateRoute>
+        ),
       },
       {
         path: "/dashboard/payment",
-        element: <Payment />,
+        element: (
+          <PrivateRoute>
+            <Payment />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/paymentHistory",
-        element: <PaymentHistory />,
+        element: (
+          <PrivateRoute>
+            <PaymentHistory />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/userHome",
-        element: <UserHome />,
+        element: (
+          <PrivateRoute>
+            <UserHome />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/adminHome",
-        element: <AdminHome />,
+        element: (
+          <AdminPrivateRoute>
+            <AdminHome />
+          </AdminPrivateRoute>
+        ),
       },
       {
         path: "/dashboard/analytics",
-        element: <Stats />,
+        element: (
+          <PrivateRoute>
+            <Stats />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/manageRegistered",
-        element: <ManageRegisteredCamps />,
+        element: (
+          <AdminPrivateRoute>
+            <ManageRegisteredCamps />
+          </AdminPrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/analytics",
+        element: (
+          <PrivateRoute>
+            <Stats />
+          </PrivateRoute>
+        ),
       },
     ],
   },
