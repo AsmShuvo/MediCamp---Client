@@ -121,7 +121,7 @@ const Cart = () => {
   return (
     <div>
       <div className="flex justify-evenly mt-4 font-serif">
-        <h2 className="text-3xl text-gray-800 rounded-full px-4 py-1 bg-primary">
+        <h2 className="text-xl md:text-3xl text-gray-800 rounded-full px-4 py-1 bg-primary">
           Total Price Unpaid: ${totalPrice}
         </h2>
       </div>

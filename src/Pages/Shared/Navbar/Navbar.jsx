@@ -23,7 +23,11 @@ const Navbar = () => {
       <div className="navbar bg-[#0007] fixed z-10">
         <div className="navbar-start">
           <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost text-gray-500 lg:hidden"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -41,7 +45,7 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-gray-100 rounded-box w-52"
             >
               <li className="text-xl font-semibold">
                 <NavLink to="/">
@@ -53,9 +57,37 @@ const Navbar = () => {
                   AVAILABLE CAMPS <IoIosArrowForward />
                 </NavLink>
               </li>
+              <li className="text-xl font-semibold">
+                <NavLink to="/reviews">
+                  REVIEWS <IoIosArrowForward />
+                </NavLink>
+              </li>
               {!user && (
                 <li className="text-xl font-semibold">
                   <NavLink to="/login">
+                    JOIN US <IoIosArrowForward />
+                  </NavLink>
+                </li>
+              )}
+              {user && isAdmin && (
+                <li className="text-xl font-semibold">
+                  <NavLink className=" uppercase" to="/dashboard/adminHome">
+                    Admin Home
+                    <IoIosArrowForward />
+                  </NavLink>
+                </li>
+              )}
+              {user && !isAdmin && (
+                <li className="text-xl font-semibold">
+                  <NavLink className="uppercase" to="/dashboard/userHome">
+                    User Home
+                    <IoIosArrowForward />
+                  </NavLink>
+                </li>
+              )}
+              {!user && (
+                <li className="text-xl font-semibold">
+                  <NavLink className="" to="/login">
                     JOIN US <GrAdd />
                   </NavLink>
                 </li>
@@ -67,8 +99,8 @@ const Navbar = () => {
             className="flex items-center space-x-3 rtl:space-x-reverse"
           >
             <FaHandHoldingMedical className="text-5xl bg-orange-700 text-primary rounded-bl-3xl rounded-br-3xl rounded-tl-3xl p-2" />
-            <span className="self-center text-3xl font-extrabold whitespace-nowrap text-primary">
-              MEDI<span className="text-secondary text-2xl">CAMP</span>
+            <span className="self-center md:text-3xl font-extrabold whitespace-nowrap text-primary">
+              MEDI<span className="text-secondary md:text-2xl">CAMP</span>
             </span>
           </a>
         </div>
@@ -84,9 +116,17 @@ const Navbar = () => {
                 AVAILABLE CAMPS <IoIosArrowForward />
               </NavLink>
             </li>
+            <li className="text-xl font-semibold">
+              <NavLink className="text-white" to="/reviews">
+                REVIEWS <IoIosArrowForward />
+              </NavLink>
+            </li>
             {user && isAdmin && (
               <li className="text-xl font-semibold">
-                <NavLink className="text-white" to="/dashboard/adminHome">
+                <NavLink
+                  className="text-white uppercase"
+                  to="/dashboard/adminHome"
+                >
                   Admin Home
                   <IoIosArrowForward />
                 </NavLink>
@@ -94,7 +134,10 @@ const Navbar = () => {
             )}
             {user && !isAdmin && (
               <li className="text-xl font-semibold">
-                <NavLink className="text-white" to="/dashboard/userHome">
+                <NavLink
+                  className="text-white uppercase"
+                  to="/dashboard/userHome"
+                >
                   User Home
                   <IoIosArrowForward />
                 </NavLink>

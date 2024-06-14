@@ -26,7 +26,7 @@ const HomeReviews = () => {
   return (
     <div className="my-20">
       <SecTitle heading={"What out clients say"} subHeading={"Reviews"} />
-      <div className="grid mx-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid md:mx-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {firstThreeReviews.map((review) => (
           <Review
             key={review.id} // Ensure each review has a unique key

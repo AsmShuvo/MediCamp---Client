@@ -5,7 +5,7 @@ const Review = ({ name, email, text, rating }) => {
   return (
     <div className="mx-auto">
       <div>
-        <div className="card w-96 border">
+        <div className="card md:w-72 lg:w-96 border">
           <div className="card-body items-center text-center">
             <h2 className="card-title text-xl text-gray-500 uppercase font-serif">
               {name}

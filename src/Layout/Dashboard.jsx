@@ -25,7 +25,7 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="flex  bg-secondary">
+    <div className="flex flex-col md:flex-row bg-secondary">
       <div className="min-h-screen">
         <div className="w-80 min-h-screen">
           <ul className="menu text-lg font-semibold">
@@ -77,7 +77,10 @@ const Dashboard = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className="flex items-center gap-1" to="/dashboard/analytics">
+                  <NavLink
+                    className="flex items-center gap-1"
+                    to="/dashboard/analytics"
+                  >
                     <IoMdAnalytics /> Analytics
                   </NavLink>
                 </li>

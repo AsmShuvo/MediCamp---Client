@@ -56,14 +56,14 @@ const Camps = () => {
   };
 
   return (
-    <div className="mx-10">
+    <div className="mx-2 md:mx-10">
       <MenuCover
         image={campsCover}
         title="Explore Our Exciting Health Camps"
         desc="Discover a variety of health camps tailored to your needs. Join us to improve your well-being with expert guidance and support."
       />
       {/* Search and sort menu */}
-      <div className="flex mt-6">
+      <div className="flex  md:flex-row flex-col mt-6">
         <form
           className="flex flex-1 justify-center items-center max-w-lg mx-auto bg-white"
           onSubmit={(e) => e.preventDefault()}
@@ -127,9 +127,9 @@ const Camps = () => {
             Search
           </button>
         </form>
-        <div className="w-1/3 flex gap-2 items-center">
+        <div className="w-1/3 flex flex-col lg:flex-row gap-2 items-center">
           <details className="dropdown">
-            <summary className="m-1 btn w-40 btn-outline text-primary hover:bg-secondary hover:border-secondary">
+            <summary className="m-1 btn ml-20 md:ml-0 w-40 btn-outline text-primary hover:bg-secondary hover:border-secondary">
               Sort Here <FaSort />
             </summary>
             <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
@@ -143,16 +143,16 @@ const Camps = () => {
               </li>
             </ul>
           </details>
-          <div className="inline-flex hover:bg-secondary h-12 items-center divide-x rounded dark:bg-violet-600 dark:text-gray-100 dark:divide-gray-300">
+          <div className="inline-flex hidden md:block hover:bg-secondary h-12 items-center divide-x rounded dark:bg-violet-600 dark:text-gray-100 dark:divide-gray-300">
             <button
               onClick={hanldeCols}
               type="button"
-              className="px-8 w-36 py-3 flex items-center gap-1"
+              className="px-8 w-28 md:w-40 py-3 flex items-center gap-1"
             >
-              <TbLayout /> Columns
-            </button>
-            <button type="button" title="Toggle dropdown" className="p-3">
-              {cols}
+              <p className="flex gap-1 items-center ">
+                {" "}
+                <TbLayout /> Columns {cols}
+              </p>
             </button>
           </div>
         </div>

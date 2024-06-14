@@ -13,12 +13,12 @@ const Banner = () => {
             className="w-full"
           />
           <div className="absolute h-full bg-gradient-to-r from-[#151515b9] to-[rgba(21,21,21,0)] flex items-center left-0 top-0  gap-4">
-            <div className="space-y-7 pl-16 mt-16">
-              <h1 className="text-4xl font-serif w-1/3 text-white font-bold animate__animated animate__backInDown ">
+            <div className="space-y-7 pl-2 md:pl-16 mt-16">
+              <h1 className=" text-lg mt-16 md:mt-1 md:text-4xl font-serif md:w-1/3 text-white font-bold animate__animated animate__backInDown ">
                 <span className="text-secondary ">Succes Story</span> -
                 Empowering Women with Health Education
               </h1>
-              <p className="text-lg w-1/2 font-mono text-gray-200 animate__animated  animate__backInUp">
+              <p className="text-lg md:w-1/2 font-mono text-gray-200 animate__animated  animate__backInUp">
                 Our team conducted a series of health education sessions focused
                 on women's health and wellness. Mrs. Jane Smith, a mother of
                 three, attended these sessions and gained valuable knowledge
@@ -49,12 +49,12 @@ const Banner = () => {
             className="w-full"
           />
           <div className="absolute h-full bg-gradient-to-r from-[#151515b9] to-[rgba(21,21,21,0)] flex items-center left-0 top-0  gap-4">
-            <div className="space-y-7 pl-16 mt-16">
-              <h1 className="text-4xl font-serif w-1/3 text-white font-bold">
+            <div className="space-y-7 pl-2 md:pl-16 mt-16">
+              <h1 className=" text-lg mt-16 md:mt-1 md:text-4xl font-serif md:w-1/3 text-white font-bold">
                 <span className="text-secondary">Succes Story</span> - Healing
                 Smiles with Dental Care
               </h1>
-              <p className="text-lg w-1/2 font-mono text-gray-200">
+              <p className="text-lg md:w-1/2 font-mono text-gray-200">
                 During the camp, we offered free dental check-ups and treatments
                 to children from underserved communities. Little Emily, a
                 7-year-old girl, received treatment for severe dental cavities.
@@ -84,12 +84,12 @@ const Banner = () => {
             className="w-full"
           />
           <div className="absolute h-full bg-gradient-to-r from-[#151515b9] to-[rgba(21,21,21,0)] flex items-center left-0 top-0  gap-4">
-            <div className="space-y-7 pl-16 mt-16">
-              <h1 className="text-4xl font-serif w-1/3 text-white font-bold">
+            <div className="space-y-7 pl-2 md:pl-16 mt-16">
+              <h1 className=" text-lg mt-16 md:mt-1 md:text-4xl font-serif md:w-1/3 text-white font-bold">
                 <span className="text-secondary">Succes Story</span> - Saving
                 Lives with Timely Diagnosis
               </h1>
-              <p className="text-lg w-1/2 font-mono text-gray-200">
+              <p className="text-lg md:w-1/2 font-mono text-gray-200">
                 One of the highlights of our camp was the early diagnosis of
                 chronic illnesses. Mr. Robert Brown, a 50-year-old resident, was
                 diagnosed with hypertension and diabetes during a routine
@@ -119,12 +119,12 @@ const Banner = () => {
             className="w-full"
           />
           <div className="absolute h-full bg-gradient-to-r from-[#151515b9] to-[rgba(21,21,21,0)] flex items-center left-0 top-0  gap-4">
-            <div className="space-y-7 pl-16 mt-16">
-              <h1 className="text-4xl font-serif w-1/3 text-white font-bold">
+            <div className="space-y-7 pl-2 md:pl-16 mt-16">
+              <h1 className=" text-lg mt-16 md:mt-1 md:text-4xl font-serif md:w-1/3 text-white font-bold">
                 <span className="text-secondary">Succes Story</span> -
                 Transforming Lives Through Free Eye Surgeries
               </h1>
-              <p className="text-lg w-1/2 font-mono text-gray-200">
+              <p className="text-lg md:w-1/2 font-mono text-gray-200">
                 In our recent medical camp, we provided free eye surgeries to
                 over 100 patients suffering from cataracts. Among them was Mr.
                 John Doe, a 65-year-old farmer who had been struggling with

@@ -22,7 +22,7 @@ const Reviews = () => {
   return (
     <div className="my-20">
       <SecTitle heading={"What out clients say"} subHeading={"Reviews"} />
-      <div className="grid mx-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid mx-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
         {reviews?.map((review) => (
           <Review
             email={review.email}

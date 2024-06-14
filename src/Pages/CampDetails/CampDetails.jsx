@@ -233,7 +233,7 @@ const CampDetails = () => {
             <strong>Location:</strong> {location}
           </p>
           <p className="text-gray-600 mb-4">
-            <strong>Fees:</strong> ${fees}
+            <strong>Fees:</strong> {fees}
           </p>
           <p className="text-gray-600 mb-4">
             <strong>Healthcare Professional:</strong> {healthcare_professional}
